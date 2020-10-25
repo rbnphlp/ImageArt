@@ -3,9 +3,53 @@ html {
 }
 
 .carousel-inner > .carousel-item > .container > img {
-  width:500px;
-  height:360px;
+     width:1500px;
+  height:500px;
 }
+   .carousel-item {
+    height: 100%;
+    
+    background: no-repeat center center scroll;
+    background-size: cover;
+    }
+
+
+.carousel-inner{
+
+    width:1500px;
+}
+
+
+h5.display-5.logo-font.text-black.text-center {
+    font-family: 'Permenant Marker', cursive;
+}
+
+
+/* from https://stackoverflow.com/questions/46249541/change-arrow-colors-in-bootstraps-carousel to customise carousel icons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: black;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: black;
+}
+
 
 /* from Bulma */
 .icon {
@@ -62,3 +106,20 @@ html {
         padding-top: 164px;
     }
 }
+
+
+/* -------------------------------- Media Queries for caption carousel */
+
+@media (min-width: 768px) {
+  .d-md-block {
+     display: block!important;
+  }
+}
+
+.d-none {
+     display: none!important;
+}
+
+
+
+
