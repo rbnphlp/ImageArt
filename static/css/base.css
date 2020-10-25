@@ -24,6 +24,13 @@ h5.display-5.logo-font.text-black.text-center {
     font-family: 'Permenant Marker', cursive;
 }
 
+h3{
+
+text-decoration: underline overline;
+font-family: 'Permenant Marker', cursive;
+
+}
+
 
 /* from https://stackoverflow.com/questions/46249541/change-arrow-colors-in-bootstraps-carousel to customise carousel icons */
 .carousel-control-prev-icon,
@@ -103,7 +110,7 @@ h5.display-5.logo-font.text-black.text-center {
     }
 
     .header-container {
-        padding-top: 164px;
+        padding-top: 25px;
     }
 }
 
