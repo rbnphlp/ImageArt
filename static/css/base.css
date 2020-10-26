@@ -22,6 +22,9 @@ html {
 
 h5.display-5.logo-font.text-black.text-center ,h5 {
     font-family: 'Permenant Marker', cursive;
+
+    padding-top:36px;
+   
 }
 
 h3{
@@ -130,3 +133,10 @@ font-family: 'Permenant Marker', cursive;
 
 
 
+
+/* -------------------------------- Homepage container spacing */
+
+.myheader-container{
+
+    padding-top:50px;
+}
