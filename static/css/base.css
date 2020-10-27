@@ -118,6 +118,17 @@ font-family: 'Permenant Marker', cursive;
 }
 
 
+@media screen and (max-width: 600px) {
+.my-logo {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+}
+
 /* -------------------------------- Media Queries for caption carousel */
 
 @media (min-width: 768px) {
@@ -131,7 +142,11 @@ font-family: 'Permenant Marker', cursive;
 }
 
 
-
+@media (max-width:800px) {
+    #carouselExampleSlidesOnly {
+        display:none !important;
+    }
+}
 
 
 /* -------------------------------- Homepage container spacing */
@@ -149,3 +164,17 @@ body.scrolled #myheader:hover {
   opacity: 1.0;
   transition: opacity .2s;
 }
+
+
+
+/* -------------------------------- Mobile  header*/
+
+h3.headline {
+    margin-top: 2.5em;
+}
+
+.mobile_image{
+ padding-top: 3em;
+
+}
+   
