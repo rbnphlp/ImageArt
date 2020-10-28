@@ -128,6 +128,16 @@ font-family: 'Permenant Marker', cursive;
     display: none;
   }
 }
+@media screen and (max-width: 600px) {
+.myfooter {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+}
 
 /* -------------------------------- Media Queries for caption carousel */
 
