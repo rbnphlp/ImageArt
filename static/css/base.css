@@ -93,6 +93,14 @@ font-family: 'Permenant Marker', cursive;
     border: 1px solid black !important;
 }
 
+.gallery{
+margin-top:-3em;
+
+}
+
+footer.myfooter {
+    margin-top: 4em;
+}
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
@@ -128,16 +136,7 @@ font-family: 'Permenant Marker', cursive;
     display: none;
   }
 }
-@media screen and (max-width: 600px) {
-.myfooter {
-    visibility: hidden;
-    clear: both;
-    float: left;
-    margin: 10px auto 5px 20px;
-    width: 28%;
-    display: none;
-  }
-}
+
 
 /* -------------------------------- Media Queries for caption carousel */
 
@@ -157,6 +156,19 @@ font-family: 'Permenant Marker', cursive;
         display:none !important;
     }
 }
+@media (max-width:800px) {
+    .gallery {
+        display:none !important;
+    }
+}
+
+@media (max-width:800px) {
+    .mylg-navbar {
+        display:none !important;
+    }
+}
+
+
 
 
 /* -------------------------------- Homepage container spacing */
@@ -187,4 +199,6 @@ h3.headline {
  padding-top: 3em;
 
 }
+   
+
    
