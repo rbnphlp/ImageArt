@@ -7,3 +7,6 @@ admin.site.register(Category)
 admin.site.register(Style_picture)
 admin.site.register(Uploaded_Picture)
 admin.site.register(Painting)
+
+
+

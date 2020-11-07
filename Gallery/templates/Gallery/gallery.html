@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container h-100 myheader-container">
+
+                    
+                    <div class="row justify-content-center h-75">
+
+                            
+                        <div class="my-auto mt-4">
+                        {{ paintings }}
+                        </div>
+
+                    </div>
+
+                    
+
+                    
+
+                    <footer class="myfooter">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright: ImageArt  
+
+     <a class="text-black-50 text-center pl-2" href="https://mdbootstrap.com/">   All parts of this website including company is built for educational purposes only and is purely fictional </a>
+     </div>
+
+  
+ 
+  <!-- Copyright -->
+
+</footer>
+    
+
+
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+ {% block extra_js %}
+
+  <script src="{% static 'js/myscroll.js' %}"></script>
+{% endblock %}
