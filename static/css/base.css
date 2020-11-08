@@ -34,6 +34,10 @@ font-family: 'Permenant Marker', cursive;
 
 }
 
+p{
+  font-family: 'Permenant Marker', cursive;
+   
+}
 
 /* from https://stackoverflow.com/questions/46249541/change-arrow-colors-in-bootstraps-carousel to customise carousel icons */
 .carousel-control-prev-icon,
@@ -226,4 +230,10 @@ h3.headline {
 
 padding-top: 5em;
 
+}
+
+.framedorunframed{
+
+    background-color:white;
+    color:black;
 }

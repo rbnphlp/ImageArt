@@ -10,6 +10,8 @@ def all_paintings(request):
 
     paintings = Painting.objects.all()
 
+   
+
     context = {
         'paintings': paintings,
     }
@@ -29,3 +31,11 @@ def product_detail(request, painting_id):
     }
 
     return render(request, 'Gallery/product_detail.html', context)
+
+
+
+
+
+
+
+
