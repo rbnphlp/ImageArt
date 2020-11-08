@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from .models import Painting
@@ -15,3 +15,17 @@ def all_paintings(request):
     }
 
     return render(request, 'Gallery/gallery.html', context)
+
+
+
+
+def product_detail(request, painting_id):
+    """ A view to show individual product/painting details """
+
+    product = get_object_or_404(Painting, pk=painting_id)
+
+    context = {
+        'product': product,
+    }
+
+    return render(request, 'Gallery/product_detail.html', context)

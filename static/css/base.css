@@ -210,3 +210,20 @@ h3.headline {
 
     padding-top: 5em;
 }
+
+.overlay {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: white;
+	z-index: -1;
+}
+
+
+.myproduct_row{
+
+padding-top: 5em;
+
+}

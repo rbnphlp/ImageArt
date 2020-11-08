@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
             <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'paintings'%}" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Gallery
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
@@ -9,7 +9,7 @@
                 <a href="" class="dropdown-item ">Landscape</a>
                 <a href="" class="dropdown-item ">Abstract</a>
                 <a href="" class="dropdown-item">Random</a>
-                <a href="" class="dropdown-item">All paintings</a>
+                <a href="{% url 'paintings'%}" class="dropdown-item">All paintings</a>
             </div>
         </li>
 
