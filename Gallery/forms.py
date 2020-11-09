@@ -15,13 +15,7 @@ class PaintingForm(forms.ModelForm):
 
         "overwrite the init method "
         super().__init__(*args, **kwargs)
-        "get categoires"
-        categories = Category.objects.all()
-        friendly_names = [(c.id, c.get_friendly_name()) for c in categories]
-
-        "Get style images  for default "
-
-        self.fields['category'].choices = friendly_names
+        
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
 

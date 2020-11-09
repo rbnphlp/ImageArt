@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from .models import Painting
+from .forms import PaintingForm
 
 # Create your views here.
 
@@ -37,5 +38,14 @@ def product_detail(request, painting_id):
 
 
 
+def add_painting(request):
+    """ Add a product to the store """
+    form = PaintingForm()
+    template = 'Gallery/add_painting.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
 
 
