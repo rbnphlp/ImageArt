@@ -1,14 +1,18 @@
  
 from django import forms
 from .models import Painting, Category
+from django.utils.translation import gettext_lazy as _
 
 
 class PaintingForm(forms.ModelForm):
 
     class Meta:
         model = Painting
-        fields = '__all__'
-
+        exclude = ['upload_style_combined','image','price','rating','name','description','category']
+        labels = {
+            'upload_pic': _('Upload a Picture'),
+            'style_pic': _('Uploada Style Picture or Painiting  for your Picture'),
+        }
         
 
     def __init__(self, *args, **kwargs):
