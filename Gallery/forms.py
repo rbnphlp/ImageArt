@@ -11,7 +11,7 @@ class PaintingForm(forms.ModelForm):
         exclude = ['upload_style_combined','image','price','rating','name','description','category']
         labels = {
             'upload_pic': _('Upload a Picture'),
-            'style_pic': _('Uploada Style Picture or Painiting  for your Picture'),
+            'style_pic': _('Upload a Style Picture or Painiting  for your Picture'),
         }
         
 
