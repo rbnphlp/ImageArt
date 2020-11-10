@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Painting
 from .forms import PaintingForm
 from utils.style_transfer import * 
+from ImageArt.settings import MEDIA_ROOT
 # Create your views here.
 
 "dimesnions for painting"
@@ -60,16 +61,16 @@ def add_painting(request):
             print(add_to_gallery)
             if not add_to_gallery :
                  " process the  files  and render "
-                 
+                 form.save()
                  upload_pic=form.cleaned_data['upload_pic']
                  upload_image = PIL.Image.open(upload_pic)
                  style_pic=form.cleaned_data['style_pic']
                  style_image = PIL.Image.open(style_pic)
                  
                  hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
-                 l=load_img(upload_pic)
-
-                 print(l)   
+                 
+                 content_image = load_img(MEDIA_ROOT+'/'+upload_pic)
+                 print(content_image)   
                  
                  return render(request, template2)
 
