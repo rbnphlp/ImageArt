@@ -61,7 +61,7 @@ def add_painting(request):
             print(add_to_gallery)
             if not add_to_gallery :
                  " process the  files  and render "
-                 form.save()
+                 saved_form=form.save()
                  upload_pic=form.cleaned_data['upload_pic']
                  upload_image = PIL.Image.open(upload_pic)
                  style_pic=form.cleaned_data['style_pic']
@@ -69,9 +69,17 @@ def add_painting(request):
                  
                  hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
                  
-                 content_image = load_img(MEDIA_ROOT+'/'+upload_pic)
-                 print(content_image)   
-                 
+                 "Get save "
+                 upload_image=load_img(MEDIA_ROOT+'/'+request.FILES['upload_pic'].name)
+                 style_image=load_img(MEDIA_ROOT+'/'+request.FILES['style_pic'].name)
+                 stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
+                 l=tensor_to_image(stylized_image)
+
+                # Resize image
+            
+                
+
+                 l.save(MEDIA_ROOT+'/'+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name)
                  return render(request, template2)
 
 
