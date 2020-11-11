@@ -26,8 +26,8 @@ class Painting(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2,blank=True,null=True)
     rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     Add_to_Gallery = models.BooleanField(default=True)
-    upload_style_combined=models.ImageField(null=True, blank=True,upload_to="Gallery_images/Upload_style_combined/")
-    image = models.ImageField(null=True, blank=True,upload_to="Gallery_images/Paintings/")
+    upload_style_combined=models.URLField(null=True, blank=True)
+    image = models.URLField(null=True, blank=True)
     
 
     def __str__(self):

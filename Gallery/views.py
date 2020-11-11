@@ -64,6 +64,7 @@ def add_painting(request):
             print(add_to_gallery)
            
             "Get save "
+            form.save()
             
             content_path=MEDIA_ROOT+'/'+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
             style_path=MEDIA_ROOT+'/'+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
@@ -71,13 +72,18 @@ def add_painting(request):
             style_image=load_img(style_path)
             stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
             l=tensor_to_image(stylized_image)
+
+            "Save the painitng"
+            url_painting=MEDIA_ROOT+'/'+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
+            displayurl=MEDIA_URL+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
+            "resize Image"
+            l= l.resize((new_width, new_height), PIL.Image.ANTIALIAS)
+            l.save(url_painting)
             if not add_to_gallery :
                 
 
                 # Resize image     
-                 url_painting=MEDIA_ROOT+'/'+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
-                 displayurl=MEDIA_URL+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
-                 l.save(url_painting)
+                 
                  context = {
         
                         'stylised_painting': displayurl,
@@ -98,13 +104,16 @@ def add_painting(request):
                 upload_name=upload_name.split(".")[0]
                 style_name=request.FILES['style_pic'].name
 
-                saved_form.name=upload_name+"with"+style_name
-
-                saved_form.save()
                 combined_image_save=MEDIA_ROOT+'/'+'Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name
                 display_combinedurl=MEDIA_URL+'Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name   
                 "Save in form for combined image" 
                 combined_image.save(combined_image_save)
+
+
+                saved_form.name=upload_name+"with"+style_name
+                saved_form.image=displayurl
+                saved_form.upload_style_combined=display_combinedurl
+                saved_form.save()
 
 
 
