@@ -5,6 +5,8 @@ from .models import Painting
 from .forms import PaintingForm
 from utils.style_transfer import * 
 from ImageArt.settings import MEDIA_ROOT,MEDIA_URL
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.base import ContentFile
 # Create your views here.
 
 "dimesnions for painting"
@@ -62,8 +64,9 @@ def add_painting(request):
             print(add_to_gallery)
            
             "Get save "
-            content_path=MEDIA_ROOT+'/'+request.FILES['upload_pic'].name
-            style_path=MEDIA_ROOT+'/'+request.FILES['style_pic'].name
+            
+            content_path=MEDIA_ROOT+'/'+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
+            style_path=MEDIA_ROOT+'/'+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
             upload_image=load_img(content_path)
             style_image=load_img(style_path)
             stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
@@ -82,16 +85,28 @@ def add_painting(request):
 
                  return render(request, template2,context)
             else: 
+                print("IN add Gallery")
                 " process the  files  and render "
                 saved_form=form.save()
                 "Combine style and upload image"
                 content_image_pil = PIL.Image.open(content_path)
                 style_image_pil = PIL.Image.open(style_path)
-             
+                "Combine the image and save image url "
                 combined_image=get_concat_v_resize(content_image_pil, style_image_pil, resize_big_image=False)
                 combined_image=combined_image.resize((new_width, new_height), PIL.Image.ANTIALIAS)
+                upload_name=request.FILES['upload_pic'].name
+                upload_name=upload_name.split(".")[0]
+                style_name=request.FILES['style_pic'].name
 
-                "Save in form for combined image"  
+                saved_form.name=upload_name+"with"+style_name
+
+                saved_form.save()
+                combined_image_save=MEDIA_ROOT+'/'+'Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name
+                display_combinedurl=MEDIA_URL+'Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name   
+                "Save in form for combined image" 
+                combined_image.save(combined_image_save)
+
+
 
     
 
