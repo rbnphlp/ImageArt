@@ -226,10 +226,14 @@ h3.headline {
 }
 
 
-.myproduct_row {
+.myproduct_row  {
 
 padding-top: 5em;
 
+}
+.painting-row{
+
+    padding-top: 5em;
 }
 .formrow{
    padding-top: 5em; 
