@@ -24,3 +24,19 @@ class PaintingForm(forms.ModelForm):
             field.widget.attrs['class'] = 'border-black rounded-0'
 
 
+class PaintingForm_price(forms.ModelForm):
+     
+     class Meta :
+
+         model=Painting
+         exclude = ['upload_style_combined','image','upload_pic','style_pic','Add_to_Gallery']
+
+
+     
+     def __init__(self, *args, **kwargs):
+
+            "overwrite the init method "
+            super().__init__(*args, **kwargs)
+            
+            for field_name, field in self.fields.items():
+                field.widget.attrs['class'] = 'border-black rounded-0'    

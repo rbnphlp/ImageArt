@@ -239,6 +239,9 @@ padding-top: 5em;
    padding-top: 5em; 
 }
 
+.container.h-100.mypaintingform-container {
+    padding-top: 10em;
+}
 .framedorunframed{
 
     background-color:white;

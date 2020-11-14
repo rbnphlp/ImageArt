@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 
 # Create your views here.
 from .models import Painting
-from .forms import PaintingForm
+from .forms import PaintingForm,PaintingForm_price
 from utils.style_transfer import * 
 from ImageArt.settings import MEDIA_ROOT,MEDIA_URL
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -46,13 +46,15 @@ def product_detail(request, painting_id):
 
 
 
-
-
 def add_painting(request):
     """ Add a product to the store """
     form = PaintingForm()
+    form_price=PaintingForm_price()
     template = 'Gallery/add_painting.html'
     template2 = 'Gallery/painting_no_gallery.html'
+    template3 ='Gallery/painting_price_form.html'
+
+    
 
     "if add to gallery is not checked , simply process the images and output to html , else  save each image  and generate a different template" 
     if request.method == 'POST':
@@ -115,6 +117,15 @@ def add_painting(request):
                 saved_form.upload_style_combined=display_combinedurl
                 saved_form.save()
 
+                "Take the user to add name description and rating"
+                context={
+                    'painting_form_price': form_price,
+                    'form_with_painting': saved_form,
+                    'stylised_painting' : displayurl
+
+                }
+
+                return render(request,template3,context)    
 
 
     
@@ -126,5 +137,7 @@ def add_painting(request):
     }
 
     return render(request, template, context)
+
+
 
 
