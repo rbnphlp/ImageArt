@@ -25,7 +25,7 @@ class Painting(models.Model):
     style_pic =  models.ImageField(null=True, blank=False,upload_to="Gallery_images/Style_pic/",default="Style_pic/default_style.jpg") 
     name = models.CharField(max_length=254,blank=False)
     description = models.TextField(blank=False)
-    price = models.DecimalField(max_digits=6, decimal_places=2,blank=False,null=True,validators=[MinValueValidator(1)])
+    price = models.DecimalField(max_digits=6, decimal_places=2,blank=False,null=True,validators=[MinValueValidator(0)])
     rating = models.IntegerField( null=True, blank=True, validators=[
             MaxValueValidator(5),
             MinValueValidator(1)

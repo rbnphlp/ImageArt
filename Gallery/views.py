@@ -126,7 +126,7 @@ def add_painting(request):
 
                 }
 
-                return render(request,template3,context)    
+                return redirect('paintings')    
 
 
     
