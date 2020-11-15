@@ -210,7 +210,7 @@ h3.headline {
 /*---------------------- Product container  for Gallery Html **********************/
 
 
-.product-container{
+{
 
     padding-top: 5em;
 }
@@ -226,18 +226,7 @@ h3.headline {
 }
 
 
-.myproduct_row  {
 
-padding-top: 5em;
-
-}
-.painting-row{
-
-    padding-top: 5em;
-}
-.formrow{
-   padding-top: 5em; 
-}
 
 .container.h-100.mypaintingform-container {
     padding-top: 10em;
@@ -249,7 +238,7 @@ padding-top: 5em;
 }
 
 
-.add-painting-container{
+.add-painting-container , .formrow ,.painting-row ,.myproduct_row, .product-container , .painting-row{
 
     padding-top:5em;
 }

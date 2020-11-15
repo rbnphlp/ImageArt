@@ -26,22 +26,17 @@
                 <div class="row mt-1 mb-2"></div>
                 <div class="row">
                     {% for product in paintings %}
+                     {% if product.image  and  product.Add_to_Gallery %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border-0">
-                                {% if product.image %}
+                               
                                 <a href="{% url 'product_detail' product.id %}">
                                     <img class="card-img-top img-fluid" src="{{ product.image }}" alt="{{ product.name }}"
                                     onmouseover="this.src='{{ product.upload_style_combined }}'" onmouseout="this.src='{{ product.image }}'">
                                     
-               
-                                
+        
                                 
                                 </a>
-                                {% else %}
-                                <a href="{% url 'product_detail' product.id %}">
-                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                                </a>
-                                {% endif %}
                                 <div class="card-body pb-0">
                                     <p class="mb-0">{{ product.name }}</p>
                                 </div>
@@ -57,8 +52,13 @@
                                         </div>
                                     </div>
                                 </div>
+                               
+                                
+                                
+                                
                             </div>
                         </div>
+                        {% endif %}
                         {% if forloop.counter|divisibleby:1 %}
                             <div class="col-12 d-sm-none mb-5">
                                 <hr>
