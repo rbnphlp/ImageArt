@@ -13,19 +13,31 @@
 
 {% block content %}
     <div class="overlay"></div>
-    <div class="container">
-        <div class="formrow row">
+    <div class="container add-painting-container">
+        <div class="formrow row  justify-content-center">
             <div class="col-12 col-md-6">
+                  
+                        <div class="my-auto mt-4">
+
+                                <h6 class="text-center">
+                                    Please Fill in the following details to create your painting
+                            </h6>
+
+                            <hr>
+
+                        </div>
                 
             </div>
         </div>
 
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-12 col-md-6">
-                <form method="POST" action="{% url 'add_painting' %}" class="form mb-2" enctype="multipart/form-data">
+                <form method="POST" action="{% url 'add_painting' %}" class="form mb-2" enctype="multipart/form-data" ALIGN='center' >
                     {% csrf_token %}
                     {{ form | crispy }}
-                    <div class="text-right">
+
+                    
+                    <div class="text-center mt-4">
                        
                         <button class="btn btn-black rounded-0" type="submit">Get your Painting </button>
                     </div>

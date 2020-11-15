@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404,redirect
+from django.urls import reverse
 
 # Create your views here.
 from .models import Painting
-from .forms import PaintingForm,PaintingForm_price
+from .forms import PaintingForm
 from utils.style_transfer import * 
 from ImageArt.settings import MEDIA_ROOT,MEDIA_URL
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -49,7 +50,7 @@ def product_detail(request, painting_id):
 def add_painting(request):
     """ Add a product to the store """
     form = PaintingForm()
-    form_price=PaintingForm_price()
+    
     template = 'Gallery/add_painting.html'
     template2 = 'Gallery/painting_no_gallery.html'
     template3 ='Gallery/painting_price_form.html'
@@ -119,7 +120,7 @@ def add_painting(request):
 
                 "Take the user to add name description and rating"
                 context={
-                    'painting_form_price': form_price,
+                   
                     'form_with_painting': saved_form,
                     'stylised_painting' : displayurl
 
@@ -137,7 +138,5 @@ def add_painting(request):
     }
 
     return render(request, template, context)
-
-
 
 

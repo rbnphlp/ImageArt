@@ -8,11 +8,28 @@ class PaintingForm(forms.ModelForm):
 
     class Meta:
         model = Painting
-        exclude = ['upload_style_combined','image','price','rating','name','description','category']
+        exclude = ['upload_style_combined','image','rating']
         labels = {
             'upload_pic': _('Upload a Picture'),
-            'style_pic': _('Upload a Style Picture or Painiting  for your Picture'),
+            'style_pic': _('Upload a Style  for your Picture'),
+            'price':  _('Set a price for your painting (£)')
         }
+
+        widget={
+
+            'Category' : forms.Select(attrs={'class':'form-control'}),
+            'price' : forms.NumberInput(attrs={'class':'form-control','minlength':1, 'maxlength': 5, 'required': True, 'type': 'number'}),
+            'name' : forms.TextInput(attrs={'class':'form-control','maxlength':100, 'required': True}),
+            'description': forms.TextInput(attrs={'class':'form-control','maxlength':100, 'required': True}),
+
+        }
+        required = (
+            'Category',
+            'price',
+            'name',
+            'description',
+        
+        )
         
 
     def __init__(self, *args, **kwargs):
@@ -23,20 +40,3 @@ class PaintingForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
 
-
-class PaintingForm_price(forms.ModelForm):
-     
-     class Meta :
-
-         model=Painting
-         exclude = ['upload_style_combined','image','upload_pic','style_pic','Add_to_Gallery']
-
-
-     
-     def __init__(self, *args, **kwargs):
-
-            "overwrite the init method "
-            super().__init__(*args, **kwargs)
-            
-            for field_name, field in self.fields.items():
-                field.widget.attrs['class'] = 'border-black rounded-0'    
