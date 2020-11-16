@@ -113,7 +113,7 @@ def add_painting(request):
                 combined_image.save(combined_image_save)
 
 
-                saved_form.name=upload_name+"with"+style_name
+                
                 saved_form.image=displayurl
                 saved_form.upload_style_combined=display_combinedurl
                 saved_form.save()
