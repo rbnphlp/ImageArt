@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.db.models import Q
 
 # Create your views here.
-from .models import Painting
+from .models import Painting,Category
 from .forms import PaintingForm
 from utils.style_transfer import * 
 from ImageArt.settings import MEDIA_ROOT,MEDIA_URL
@@ -24,8 +24,18 @@ def all_paintings(request):
 
     paintings = Painting.objects.all()
     query = None
+    categories=None
 
     if request.GET:
+
+            if 'category' in request.GET:
+                categories = request.GET['category'].split(',')
+                print(categories)
+                paintings = paintings.filter(category__name__in=categories)
+                print(paintings)
+                categories = Category.objects.filter(name__in=categories)
+
+
             if 'q' in request.GET:
                 query = request.GET['q']
                 if not query:

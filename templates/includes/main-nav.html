@@ -5,10 +5,10 @@
                 Gallery
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="" class="dropdown-item">Portraits</a>
-                <a href="" class="dropdown-item ">Landscape</a>
-                <a href="" class="dropdown-item ">Abstract</a>
-                <a href="" class="dropdown-item">Random</a>
+                <a href="{% url 'paintings' %}?category=Portraits" class="dropdown-item">Portraits</a>
+                <a href="{% url 'paintings' %}?category=Landscape" class="dropdown-item ">Landscape</a>
+                <a href="{% url 'paintings' %}?category=Abstract" class="dropdown-item ">Abstract</a>
+                <a href="{% url 'paintings' %}?category=Random" class="dropdown-item">Random</a>
                 <a href="{% url 'paintings'%}" class="dropdown-item">All paintings</a>
             </div>
         </li>
