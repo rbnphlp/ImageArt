@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
+from django.db.models.functions import Lower
 
 # Create your views here.
 from .models import Painting,Category
@@ -22,11 +23,26 @@ hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylizati
 def all_paintings(request):
     """ A view to show all paintings, including sorting and search queries """
 
-    paintings = Painting.objects.all()
+    paintings = Painting.objects.filter(Add_to_Gallery=True)
     query = None
     categories=None
+    sort = None
+    direction = None
 
     if request.GET:
+            if 'sort' in request.GET:
+                sortkey = request.GET['sort']
+                sort = sortkey
+                if sortkey == 'name':
+                    sortkey = 'lower_name'
+                    paintings = paintings.annotate(lower_name=Lower('name'))
+                if sortkey == 'category':
+                    sortkey = 'category__name'
+                if 'direction' in request.GET:
+                    direction = request.GET['direction']
+                    if direction == 'desc':
+                        sortkey = f'-{sortkey}'
+                paintings = paintings.order_by(sortkey)
 
             if 'category' in request.GET:
                 categories = request.GET['category'].split(',')
@@ -45,17 +61,19 @@ def all_paintings(request):
                 queries = Q(name__icontains=query) | Q(description__icontains=query)
                 paintings = paintings.filter(queries)
 
-      
+    current_sorting = f'{sort}_{direction}'  
 
     context = {
         'paintings': paintings,
         'search_term': query,
          'current_categories': categories,
+         'current_sorting': current_sorting,
+         
     }
 
     return render(request, 'Gallery/gallery.html', context)
 
-
+    
 
 
 def product_detail(request, painting_id):
