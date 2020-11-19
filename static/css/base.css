@@ -242,3 +242,8 @@ h3.headline {
 
     padding-top:5em;
 }
+
+a.category-badge > span.badge:hover {
+    background: #212529 !important;
+    color: #fff !important;
+}

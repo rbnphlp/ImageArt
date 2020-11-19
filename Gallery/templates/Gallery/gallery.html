@@ -40,12 +40,34 @@
            </div>
            </div>
         </div>
+
+
+     
+
+                 <div class="row">
+        <div class="col text-center mt-3">
+                
+              {% for c in current_categories %}
+                    <a class="category-badge text-decoration-none" href="{% url 'paintings' %}?category={{ c.name }}">
+                        <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.name }}</span>
+                    </a>
+                {% endfor %}
+                <hr class="w-50 mb-1">
+            </div>
+        </div>
+
+
         <div class="row">
+       
             
            
             <div class="product-container col-10 offset-1">
                 <div class="row mt-1 mb-2"></div>
                 <div class="row">
+            
+
+
+
                     {% for product in paintings %}
                      {% if product.image  and  product.Add_to_Gallery %}
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">

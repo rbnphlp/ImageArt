@@ -50,6 +50,7 @@ def all_paintings(request):
     context = {
         'paintings': paintings,
         'search_term': query,
+         'current_categories': categories,
     }
 
     return render(request, 'Gallery/gallery.html', context)
