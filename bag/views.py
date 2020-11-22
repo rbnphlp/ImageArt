@@ -12,7 +12,7 @@ def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
 
     quantity = int(request.POST.get('quantity'))
-    framed_unframed= request.POST.get('framed_unframed_dropdown')
+    framed_unframed= request.POST.get('painting_dim')
     print(framed_unframed)
     
     redirect_url = request.POST.get('redirect_url')
