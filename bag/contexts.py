@@ -9,16 +9,23 @@ def bag_contents(request):
     total = 0
     product_count = 0
     bag = request.session.get('bag', {})
+    painting_frames= request.POST.get('painting_frame')
     "if framed - add price with GBP 5"
 
-    for item_id, quantity in bag.items():
+    for item_id, items in bag.items():
         product = get_object_or_404(Painting, pk=item_id)
+        quantity=items[0]
+        frame_desc=items[1]
+        frame_dim=items[2]
         total += quantity * product.price
         product_count += quantity
+        
         bag_items.append({
             'item_id': item_id,
             'quantity': quantity,
             'product': product,
+            'frames' : frame_desc,
+            'size'  : frame_dim,
         })
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
