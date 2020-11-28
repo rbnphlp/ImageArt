@@ -210,10 +210,6 @@ h3.headline {
 /*---------------------- Product container  for Gallery Html **********************/
 
 
-{
-
-    padding-top: 5em;
-}
 
 .overlay {
 	height: 100%;
@@ -238,7 +234,7 @@ h3.headline {
 }
 
 
-.add-painting-container , .formrow ,.painting-row ,.myproduct_row, .product-container , .painting-row , .searchbar{
+.add-painting-container , .formrow ,.painting-row ,.myproduct_row, .product-container , .painting-row , .searchbar ,.shopping-bag-header{
 
     padding-top:5em;
 }
@@ -246,4 +242,16 @@ h3.headline {
 a.category-badge > span.badge:hover {
     background: #212529 !important;
     color: #fff !important;
+}
+
+
+ a.Gallery-badge > span.badge:hover {
+    background: #212529 !important;
+    color: #fff !important;
+}
+
+.btt-link,
+.update-link,
+.remove-item {
+    cursor: pointer;
 }
