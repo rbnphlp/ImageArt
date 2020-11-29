@@ -9,6 +9,7 @@ def bag_contents(request):
     total = 0
     product_count = 0
     bag = request.session.get('bag', {})
+    print(bag)
     painting_frames= request.POST.get('painting_frame')
     "if framed - add price with GBP 5"
 

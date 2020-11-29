@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse, HttpResponse
 
 # Create your views here.
 
@@ -17,7 +17,7 @@ def add_to_bag(request, item_id):
 
     print((painting_frames,frame_size))
     
-    
+    print(request.POST)
     redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {})
     'Get frame content'
@@ -32,3 +32,42 @@ def add_to_bag(request, item_id):
     request.session['bag'] = bag
     print(request.session['bag'])
     return redirect(redirect_url)
+
+
+
+
+def adjust_bag(request, item_id):
+    """Adjust the quantity of the specified product to the specified amount"""
+
+    quantity = int(request.POST.get('quantity'))
+    bag = request.session.get('bag', {})
+
+    "Add quantity fora given "
+
+    if quantity > 0:
+            bag[item_id][0] = quantity
+    else:
+        del bag[item_id]
+        if not bag[item_id]:
+            bag.pop(item_id)
+   
+
+    request.session['bag'] = bag
+    return redirect(reverse('view_bag'))
+
+
+
+def remove_from_bag(request, item_id):
+    """Remove the item from the shopping bag"""
+    
+
+    bag = request.session.get('bag', {})
+    print(bag,item_id)
+
+
+    bag.pop(item_id)
+
+    request.session['bag'] = bag
+    return HttpResponse(status=200)
+
+    
