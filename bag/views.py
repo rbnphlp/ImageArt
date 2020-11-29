@@ -1,4 +1,7 @@
 from django.shortcuts import render,redirect,reverse, HttpResponse
+from django.contrib import messages
+
+from Gallery.models import Painting
 
 # Create your views here.
 
@@ -10,6 +13,8 @@ def view_bag(request):
 
 def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
+
+    Painting_=Painting.objects.get(pk=item_id)
 
     quantity = int(request.POST.get('quantity'))
     painting_frames= request.POST.get('painting_frame')
@@ -27,6 +32,7 @@ def add_to_bag(request, item_id):
         bag[item_id]=[quantity,painting_frames,frame_size]
     else:
         bag[item_id]=[quantity,painting_frames,frame_size]
+        messages.success(request, f'Added {Painting_.name} to your bag')
 
     print(bag)
     request.session['bag'] = bag
