@@ -31,7 +31,7 @@ def add_to_bag(request, item_id):
 
     if item_id in list(bag.keys()):
         bag[item_id]=[quantity,painting_frames,frame_size]
-        messages.success(request, f'Updated {Painting_.name} quantity to {bag[item_id]}')
+        messages.success(request, f'Updated {Painting_.name} quantity to {bag[item_id][0]}')
     else:
         bag[item_id]=[quantity,painting_frames,frame_size]
         messages.success(request, f'Added {Painting_.name} to your bag')
