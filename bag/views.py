@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,reverse, HttpResponse
+from django.shortcuts import render,redirect,reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 
 from Gallery.models import Painting
@@ -14,7 +14,8 @@ def view_bag(request):
 def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
 
-    Painting_=Painting.objects.get(pk=item_id)
+    Painting_= get_object_or_404(Painting, pk=item_id)
+    print("painting name"+str(Painting.name))
 
     quantity = int(request.POST.get('quantity'))
     painting_frames= request.POST.get('painting_frame')
@@ -30,6 +31,7 @@ def add_to_bag(request, item_id):
 
     if item_id in list(bag.keys()):
         bag[item_id]=[quantity,painting_frames,frame_size]
+        messages.success(request, f'Updated {Painting_.name} quantity to {bag[item_id]}')
     else:
         bag[item_id]=[quantity,painting_frames,frame_size]
         messages.success(request, f'Added {Painting_.name} to your bag')
@@ -50,12 +52,17 @@ def adjust_bag(request, item_id):
 
     "Add quantity fora given "
 
+    Painting_= get_object_or_404(Painting, pk=item_id)
+
+
     if quantity > 0:
             bag[item_id][0] = quantity
+            messages.success(request, f'Updated {Painting_.name} quantity to {bag[item_id][0]}')
     else:
         del bag[item_id]
         if not bag[item_id]:
             bag.pop(item_id)
+            messages.success(request, f'Removed {Painting_.name} from your bag')
    
 
     request.session['bag'] = bag
