@@ -176,3 +176,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
+# Stripe
+
+STRIPE_CURRENCY = 'usd'
+STRIPE_PUBLIC_KEY = os.getenv('stripe_public_key', '')
+STRIPE_SECRET_KEY = os.getenv('client_secret', '')
