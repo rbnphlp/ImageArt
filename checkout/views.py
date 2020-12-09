@@ -10,6 +10,8 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
+    
+
     bag = request.session.get('bag', {})
     if not bag:
         messages.error(request, "There's nothing in your bag at the moment")
@@ -24,9 +26,11 @@ def checkout(request):
         currency=settings.STRIPE_CURRENCY,
     )
 
-    print(intent)
+    print(intent.client_secret)
+    
 
     order_form = OrderForm()
+    
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
