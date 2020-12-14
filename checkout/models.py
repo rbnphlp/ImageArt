@@ -76,4 +76,4 @@ class OrderLineItem(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Name {self.Painting.name} on order {self.order.order_number}'
+        return f'Name {self.Painting.name} on order {self.order.order_number} with Frame Desc {self.frame_desc}'
