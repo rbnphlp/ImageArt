@@ -78,6 +78,7 @@ def all_paintings(request):
 
 def product_detail(request, painting_id):
     """ A view to show individual product/painting details """
+    print(painting_id)
 
     product = get_object_or_404(Painting, pk=painting_id)
 
@@ -183,3 +184,29 @@ def add_painting(request):
     return render(request, template, context)
 
 
+
+def edit_painting(request, painting_id):
+
+
+
+    """ Edit a product in the store """
+    product = get_object_or_404(Painting, pk=painting_id)
+    if request.method == 'POST':
+        form = PaintingForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated product!')
+            return redirect(reverse('product_detail', args=[product.id]))
+        else:
+            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+    else:
+        form = PaintingForm(instance=product)
+        messages.info(request, f'You are editing {product.name}')
+
+    template = 'Gallery/edit_painting.html'
+    context = {
+        'form': form,
+        'product': product,
+    }
+
+    return render(request, template, context)
