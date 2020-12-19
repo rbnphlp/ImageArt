@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .models import Painting,Category
@@ -90,7 +91,7 @@ def product_detail(request, painting_id):
 
 
 
-
+@login_required
 def add_painting(request):
     """ Add a product to the store """
     form = PaintingForm()
@@ -184,7 +185,7 @@ def add_painting(request):
     return render(request, template, context)
 
 
-
+@login_required
 def edit_painting(request, painting_id):
 
 
@@ -212,7 +213,7 @@ def edit_painting(request, painting_id):
     return render(request, template, context)
 
 
-
+@login_required
 def delete_painting(request, painting_id):
     """ Delete a product from the store """
     product = get_object_or_404(Painting, pk=painting_id)
