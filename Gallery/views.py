@@ -210,3 +210,12 @@ def edit_painting(request, painting_id):
     }
 
     return render(request, template, context)
+
+
+
+def delete_painting(request, painting_id):
+    """ Delete a product from the store """
+    product = get_object_or_404(Painting, pk=painting_id)
+    product.delete()
+    messages.success(request, 'Product deleted!')
+    return redirect(reverse('paintings'))
