@@ -183,3 +183,5 @@ STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('stripe_public_key', '')
 STRIPE_SECRET_KEY = os.getenv('client_secret', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+
+DEFAULT_FROM_EMAIL = 'IMAGEART@example.com'
