@@ -1,5 +1,7 @@
 
 let root = document.documentElement;
+
+//  Function to chnage color property for frames selected
 $( "#id_painting_frame" ).change(function () {
     var frame_color = "";
     $( "#id_painting_frame option:selected" ).each(function() {
@@ -21,6 +23,10 @@ $( "#id_painting_frame" ).change(function () {
     root.style.setProperty("--color", "khaki");
   }
   }).change();
+
+
+
+//  Function to dimensions of image based on user selection
 
 
 
