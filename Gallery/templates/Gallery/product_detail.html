@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'Gallery/css/Gallery.css' %}">
+{% endblock %}
+
+
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -9,6 +14,8 @@
     </div>
 {% endblock %}
 
+
+
 {% block content %}
     <div class="overlay"></div>
     <div class="my_product_detail container-fluid">
@@ -16,9 +23,18 @@
             <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
                 <div class="image-container my-5">
                     {% if product.image %}
-                        <a href="{{ product.image}}" target="_blank">
-                            <img  width="500" height="600" src="{{ product.image }}" alt="{{ product.name }}">
-                        </a>
+                        
+                    <div class="frame">
+                            <img  src="{{ product.image }}" alt="{{ product.name }}"> 
+
+                             
+                        
+                    </div>
+
+                        
+
+                            
+                        
                         {% else %}
                         <a href="">
                             <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
@@ -73,7 +89,7 @@
                                         <option value="Oak Effect Frame">Oak Effect Frame</option>
                                         <option value="Silver Foil Flat Frame">Silver Foil Flat Frame</option>
                                         <option value="Gold Rope Frame">Gold Rope Frame</option>
-                                        <option value="Silver Foil Flat Frame">Silver Foil Flat Frame</option>
+                                        <option value="Khaki Frame">Khaki Frame</option>
 
                                     </select>
                                 </div>
@@ -119,4 +135,10 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+
+{% block postloadjs %}
+
+    <script src="{% static 'Gallery/js/Gallery.js' %}"></script>
 {% endblock %}

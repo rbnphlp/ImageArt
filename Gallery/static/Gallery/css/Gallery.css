@@ -1,0 +1,41 @@
+
+/** css  code adapted from https://medium.com/@saishaddai/til-css-to-draw-a-frame-from-a-picture-2b0cfcf67c9a ***/
+
+
+:root{
+
+
+ --frame_color: var(--color);
+} 
+
+
+
+img {
+    width: 300px;
+    height: 400px;
+    border: solid 2px;
+    border-bottom-color: #ffe;
+    border-left-color: #eed;
+    border-right-color: #eed;
+    border-top-color: #CF9E4B;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.frame {
+    background-color: #ddc;
+    border: solid 5vmin #eee;
+    border-bottom-color: var(--frame_color);
+    border-left-color:var(--frame_color);
+    border-radius: 2px;
+    border-right-color: var(--frame_color);
+    border-top-color: var(--frame_color);
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 1em 0em;
+    height: 35em;
+    padding: 8vmin;
+    position: relative;
+    text-align: center;
+}
