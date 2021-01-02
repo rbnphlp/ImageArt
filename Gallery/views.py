@@ -14,6 +14,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.base import ContentFile
 # Create your views here.
 
+
 "dimesnions for painting"
 new_width  = 380
 new_height = 512
