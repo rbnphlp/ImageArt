@@ -27,7 +27,7 @@ SECRET_KEY = 'cb!lo3v%(k=u!&^!@skyjf@fh38f(ebfhrnm9zw9k0k3b-!n7h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['image-art.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -124,12 +124,18 @@ WSGI_APPLICATION = 'ImageArt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+
+
+    DATABASES={'default': dj_database_url.parse("postgres://fbbsabfurkhntz:61063cf84844d7bb8c5cd6fc9c7d45f37cea2160c8512bff8497f40cd009b49e@ec2-54-155-22-153.eu-west-1.compute.amazonaws.com:5432/d8sf1hhhjm0mfh")}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
