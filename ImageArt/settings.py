@@ -124,10 +124,12 @@ WSGI_APPLICATION = 'ImageArt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DatabaseURL = os.getenv('DATABASE_URL', '')
+
 if 'DATABASE_URL' in os.environ:
 
 
-    DATABASES={'default': dj_database_url.parse("postgres://fbbsabfurkhntz:61063cf84844d7bb8c5cd6fc9c7d45f37cea2160c8512bff8497f40cd009b49e@ec2-54-155-22-153.eu-west-1.compute.amazonaws.com:5432/d8sf1hhhjm0mfh")}
+    DATABASES={'default': dj_database_url.parse(DatabaseURL)}
 
 else:
     DATABASES = {
