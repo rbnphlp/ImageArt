@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'bag',
     'checkout',
     'profiles',
-    
+    'storages',
 
 ]
 
@@ -124,10 +124,12 @@ WSGI_APPLICATION = 'ImageArt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DatabaseURL = os.getenv('DATABASE_URL', '')
+
 if 'DATABASE_URL' in os.environ:
 
 
-    DATABASES={'default': dj_database_url.parse("postgres://fbbsabfurkhntz:61063cf84844d7bb8c5cd6fc9c7d45f37cea2160c8512bff8497f40cd009b49e@ec2-54-155-22-153.eu-west-1.compute.amazonaws.com:5432/d8sf1hhhjm0mfh")}
+    DATABASES={'default': dj_database_url.parse(DatabaseURL)}
 
 else:
     DATABASES = {
@@ -136,6 +138,32 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+
+
+#AWS
+
+
+if 'USE_AWS' in os.environ:
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'imageart'
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
