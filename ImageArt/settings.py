@@ -144,6 +144,8 @@ else:
 #AWS
 
 
+
+
 if 'USE_AWS' in os.environ:
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'imageart'
