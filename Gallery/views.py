@@ -140,33 +140,25 @@ def add_painting(request):
             add_to_gallery=form.cleaned_data['Add_to_Gallery']
             print(add_to_gallery)
            
-            "Get save "
-            form.save()
+            
 
             ## Get file names  and url paths from s3
             content_filename=request.FILES['upload_pic'].name
             style_filename=request.FILES['style_pic'].name
-            content_path=MEDIA_URL+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
-            style_path=MEDIA_URL+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
+            content_path="s3://imageart/media/"+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
+            style_path="s3://imageart/media/"+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
             print("my content path"+str(content_path))
             print("my style path :",str(style_path))
 
             ### Save url files for upload and style images , process using tensorflow and delete
             
            
-            try:
+         
+           # Load upload image from s3
+            
 
-                content_save_path=MEDIA_ROOT+'/'+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
-                urllib.request.urlretrieve(content_path, content_save_path)
-                style_save_path=MEDIA_ROOT+'/'+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
-                urllib.request.urlretrieve(style_path, style_save_path)
-            except:
-                print("No file found")
-
-
-
-            upload_image=load_img(content_save_path)
-            style_image=load_img(style_save_path)
+            upload_image=load_img(content_path)
+            style_image=load_img(style_path)
             stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
             l=tensor_to_image(stylized_image)
 
@@ -213,14 +205,13 @@ def add_painting(request):
                  return render(request, template2,context)
             else: 
                 print("IN add Gallery")
-                " process the  files  and render "
-                saved_form=form.save()
+                
                 
                 
                 
                 "Combine style and upload image save to media and upload"
-                content_image_pil = PIL.Image.open(content_save_path)
-                style_image_pil = PIL.Image.open(style_save_path)
+                content_image_pil = PIL.Image.open(request.FILES['upload_pic'])
+                style_image_pil = PIL.Image.open(request.FILES['style_pic'])
                 "Combine the image and save image url "
                 combined_image=get_concat_v_resize(content_image_pil, style_image_pil, resize_big_image=False)
                 combined_image=combined_image.resize((new_width, new_height), PIL.Image.ANTIALIAS)
@@ -243,6 +234,8 @@ def add_painting(request):
                     Body=buffer,
                     ContentType='image/jpeg',
                 )
+                "process the  files  and render "
+                saved_form=form.save()
 
                 saved_form.image=displayurl
                 saved_form.upload_style_combined=display_combinedurl
@@ -256,10 +249,6 @@ def add_painting(request):
 
                 }
 
-                # remove all media from media/ as all images now hosted on aws
-                os.remove(content_save_path)
-                os.remove(style_save_path)
-                
 
                 return redirect('paintings')    
 
