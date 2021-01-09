@@ -9,9 +9,17 @@ from django.contrib.auth.decorators import login_required
 from .models import Painting,Category
 from .forms import PaintingForm
 from utils.style_transfer import * 
-from ImageArt.settings import MEDIA_ROOT,MEDIA_URL
+from ImageArt.settings import MEDIA_ROOT,MEDIA_URL,AWS_STORAGE_BUCKET_NAME,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.base import ContentFile
+import boto3
+from PIL import Image
+import io 
+import urllib.request
+import os
+import glob
+
+
 # Create your views here.
 
 
@@ -20,6 +28,26 @@ new_width  = 380
 new_height = 512
 
 hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
+
+
+
+
+
+## utils for getting s3 uploaded pics urls :
+s3 = boto3.client('s3')
+
+client = boto3.client('s3',
+                          region_name='eu-west-2',
+                          
+                          aws_access_key_id=AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+
+
+
+def get_s3_img_url():
+
+    return(NotImplemented)
+
                  
 
 def all_paintings(request):
@@ -114,20 +142,64 @@ def add_painting(request):
            
             "Get save "
             form.save()
+
+            ## Get file names  and url paths from s3
+            content_filename=request.FILES['upload_pic'].name
+            style_filename=request.FILES['style_pic'].name
+            content_path=MEDIA_URL+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
+            style_path=MEDIA_URL+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
+            print("my content path"+str(content_path))
+            print("my style path :",str(style_path))
+
+            ### Save url files for upload and style images , process using tensorflow and delete
             
-            content_path=MEDIA_ROOT+'/'+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
-            style_path=MEDIA_ROOT+'/'+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
-            upload_image=load_img(content_path)
-            style_image=load_img(style_path)
+           
+            try:
+
+                content_save_path=MEDIA_ROOT+'/'+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
+                urllib.request.urlretrieve(content_path, content_save_path)
+                style_save_path=MEDIA_ROOT+'/'+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
+                urllib.request.urlretrieve(style_path, style_save_path)
+            except:
+                print("No file found")
+
+
+
+            upload_image=load_img(content_save_path)
+            style_image=load_img(style_save_path)
             stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
             l=tensor_to_image(stylized_image)
 
-            "Save the painitng"
-            url_painting=MEDIA_ROOT+'/'+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
-            displayurl=MEDIA_URL+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
+            #Save the Painting in the media folder , to upload to s3 and then delet 
+            
+          
             "resize Image"
             l= l.resize((new_width, new_height), PIL.Image.ANTIALIAS)
-            l.save(url_painting)
+            
+
+            ### Read data to temporary buffer and save to s3
+            buffer = io.BytesIO()
+            l.save(buffer,format="jpeg")
+            buffer.seek(0) # rewind pointer back to start
+            s3.put_object(
+                Bucket=AWS_STORAGE_BUCKET_NAME,
+                Key='media/Gallery_images/Paintings/{}'.format(content_filename),
+                Body=buffer,
+                ContentType='image/jpeg',
+            )
+
+
+         
+            
+            
+            #After painitings saved remove :: media files 
+
+
+
+
+            
+            displayurl=MEDIA_URL+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
+            
             if not add_to_gallery :
                 
 
@@ -143,9 +215,12 @@ def add_painting(request):
                 print("IN add Gallery")
                 " process the  files  and render "
                 saved_form=form.save()
-                "Combine style and upload image"
-                content_image_pil = PIL.Image.open(content_path)
-                style_image_pil = PIL.Image.open(style_path)
+                
+                
+                
+                "Combine style and upload image save to media and upload"
+                content_image_pil = PIL.Image.open(content_save_path)
+                style_image_pil = PIL.Image.open(style_save_path)
                 "Combine the image and save image url "
                 combined_image=get_concat_v_resize(content_image_pil, style_image_pil, resize_big_image=False)
                 combined_image=combined_image.resize((new_width, new_height), PIL.Image.ANTIALIAS)
@@ -153,13 +228,22 @@ def add_painting(request):
                 upload_name=upload_name.split(".")[0]
                 style_name=request.FILES['style_pic'].name
 
-                combined_image_save=MEDIA_ROOT+'/'+'Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name
+                combined_image_save=MEDIA_ROOT+'/''Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name
                 display_combinedurl=MEDIA_URL+'Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name   
+                path_combinedimage_AWS='media/Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name  
                 "Save in form for combined image" 
-                combined_image.save(combined_image_save)
 
+                 ### Read data to temporary buffer and save to s3
+                buffer = io.BytesIO()
+                combined_image.save(buffer,format="jpeg")
+                buffer.seek(0) # rewind pointer back to start
+                s3.put_object(
+                    Bucket=AWS_STORAGE_BUCKET_NAME,
+                    Key='media/Gallery_images/Upload_style_combined/{}'.format(upload_name+"_"+style_name),
+                    Body=buffer,
+                    ContentType='image/jpeg',
+                )
 
-                
                 saved_form.image=displayurl
                 saved_form.upload_style_combined=display_combinedurl
                 saved_form.save()
@@ -171,6 +255,11 @@ def add_painting(request):
                     'stylised_painting' : displayurl
 
                 }
+
+                # remove all media from media/ as all images now hosted on aws
+                os.remove(content_save_path)
+                os.remove(style_save_path)
+                
 
                 return redirect('paintings')    
 
