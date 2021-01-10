@@ -28,7 +28,7 @@ import requests
 
 "dimesnions for painting"
 new_width  = 380
-new_height = 512
+new_height = 350
 
 # hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
 

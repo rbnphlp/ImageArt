@@ -80,7 +80,7 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="col-12 col-md-6 order-md-first">
                         <p class="text-muted mt-3 text-center text-md-left">
                             {% if search_term or current_categories or current_sorting != 'None_None' %}
@@ -101,7 +101,7 @@
                             <div class="card h-100 border-0">
                                
                                 <a href="{% url 'product_detail' product.id %}">
-                                    <img class="gallerypaintings card-img-top img-fluid" height="512" src="{{ product.image }}" alt="{{ product.name }}" 
+                                    <img class="gallerypaintings card-img-top img-fluid" height="350" src="{{ product.image }}" alt="{{ product.name }}" 
                                     onmouseover="this.src='{{ product.upload_style_combined }}'" onmouseout="this.src='{{ product.image }}'">
                                     
         
