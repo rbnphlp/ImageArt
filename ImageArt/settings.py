@@ -23,10 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # Changed to random secret key genrations
-SECRET_KEY = 'cb!lo3v%(k=u!&^!@skyjf@fh38f(ebfhrnm9zw9k0k3b-!n7h'
+SECRET_KEY =  os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
 
 ALLOWED_HOSTS = ['image-art.herokuapp.com', 'localhost']
 
@@ -132,16 +133,23 @@ WSGI_APPLICATION = 'ImageArt.wsgi.application'
 DatabaseURL = os.getenv('DATABASE_URL', '')
 
 
-DATABASES={'default': dj_database_url.parse(DatabaseURL)}
-
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 #Media files and AWS settings 
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
@@ -214,7 +222,7 @@ USE_TZ = True
 
 
 
-FREE_DELIVERY_THRESHOLD = 50
+FREE_DELIVERY_THRESHOLD = 20
 STANDARD_DELIVERY_PERCENTAGE = 10
 # Stripe
 
