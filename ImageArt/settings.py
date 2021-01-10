@@ -222,4 +222,13 @@ STRIPE_PUBLIC_KEY = os.getenv('stripe_public_key', '')
 STRIPE_SECRET_KEY = os.getenv('client_secret', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
-DEFAULT_FROM_EMAIL = 'IMAGEART@example.com'
+
+
+## EMAIL Configs for sending email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
