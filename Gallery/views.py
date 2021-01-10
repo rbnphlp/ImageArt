@@ -190,7 +190,7 @@ def add_painting(request):
             buffer.seek(0) # rewind pointer back to start
             s3.put_object(
                 Bucket=AWS_STORAGE_BUCKET_NAME,
-                Key='media/Gallery_images/Paintings/{}'.format(+str(file_name_append)+content_filename),
+                Key='media/Gallery_images/Paintings/{}'.format(str(file_name_append)+content_filename),
                 Body=buffer,
                 ContentType='image/jpeg',
             )
