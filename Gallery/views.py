@@ -152,6 +152,7 @@ def add_painting(request):
         form = PaintingForm(request.POST, request.FILES)
         print("In request post")
         if form.is_valid():
+            
             "check if add to gallery is not added  and simply render no saving images"
             add_to_gallery=form.cleaned_data['Add_to_Gallery']
             print(add_to_gallery)
@@ -256,7 +257,8 @@ def add_painting(request):
                 combined_image_save=MEDIA_ROOT+'/''Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name
                 display_combinedurl=MEDIA_URL+'Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name   
                 path_combinedimage_AWS='media/Gallery_images/Upload_style_combined/'+upload_name+"_"+style_name  
-                "Save in form for combined image" 
+                "Save in form for combined image"
+                print("l2") 
 
                  ### Read data to temporary buffer and save to s3
                 buffer = io.BytesIO()
