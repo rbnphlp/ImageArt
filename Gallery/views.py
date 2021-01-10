@@ -20,6 +20,7 @@ import os
 import glob
 import random
 import string
+import requests
 
 
 # Create your views here.
@@ -160,40 +161,53 @@ def add_painting(request):
             ## Get file names  and url paths from s3
             content_filename=request.FILES['upload_pic'].name
             style_filename=request.FILES['style_pic'].name
-            content_path="s3://imageart/media/"+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
-            style_path="s3://imageart/media/"+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
+            content_path=MEDIA_URL+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
+            style_path=MEDIA_URL+'Gallery_images/Style_pic/'+request.FILES['style_pic'].name
             print("my content path"+str(content_path))
             print("my style path :",str(style_path))
 
             ### Save url files for upload and style images , process using tensorflow and delete
+
+
+            r = requests.post(
+            "https://api.deepai.org/api/fast-style-transfer",
+            data={
+                'content': content_path,
+                'style': style_path,
+            },
+            headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
+
+            )
+            print(r)
+            displayurl=r.json()['output_url']
             
            
          
            # Load upload image from s3
             
 
-            upload_image=load_img(content_path)
-            style_image=load_img(style_path)
-            stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
-            l=tensor_to_image(stylized_image)
+            # upload_image=load_img(content_path)
+            # style_image=load_img(style_path)
+            # stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
+            # l=tensor_to_image(stylized_image)
 
-            #Save the Painting in the media folder , to upload to s3 and then delet 
+            # #Save the Painting in the media folder , to upload to s3 and then delet 
             
           
-            "resize Image"
-            l= l.resize((new_width, new_height), PIL.Image.ANTIALIAS)
+            # "resize Image"
+            # l= l.resize((new_width, new_height), PIL.Image.ANTIALIAS)
             
 
-            ### Read data to temporary buffer and save to s3
-            buffer = io.BytesIO()
-            l.save(buffer,format="jpeg")
-            buffer.seek(0) # rewind pointer back to start
-            s3.put_object(
-                Bucket=AWS_STORAGE_BUCKET_NAME,
-                Key='media/Gallery_images/Paintings/{}'.format(content_filename+"_"+str(file_name_append)),
-                Body=buffer,
-                ContentType='image/jpeg',
-            )
+            # ### Read data to temporary buffer and save to s3
+            # buffer = io.BytesIO()
+            # l.save(buffer,format="jpeg")
+            # buffer.seek(0) # rewind pointer back to start
+            # s3.put_object(
+            #     Bucket=AWS_STORAGE_BUCKET_NAME,
+            #     Key='media/Gallery_images/Paintings/{}'.format(content_filename+"_"+str(file_name_append)),
+            #     Body=buffer,
+            #     ContentType='image/jpeg',
+            # )
 
 
          
@@ -206,7 +220,7 @@ def add_painting(request):
 
 
             
-            displayurl=MEDIA_URL+'Gallery_images/Paintings/'+content_filename+"_"+str(file_name_append)
+           
             
             if not add_to_gallery :
                 
