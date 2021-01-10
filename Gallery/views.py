@@ -18,6 +18,8 @@ import io
 import urllib.request
 import os
 import glob
+import random
+import string
 
 
 # Create your views here.
@@ -47,6 +49,16 @@ client = boto3.client('s3',
 def get_s3_img_url():
 
     return(NotImplemented)
+
+
+
+
+def get_random_string(length):
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return(result_str)
+    
+
 
                  
 
@@ -124,6 +136,9 @@ def product_detail(request, painting_id):
 def add_painting(request):
     """ Add a product to the store """
     form = PaintingForm()
+
+    "get a random string for file names"
+    file_name_append=get_random_string(3)
     
     template = 'Gallery/add_painting.html'
     template2 = 'Gallery/painting_no_gallery.html'
@@ -175,7 +190,7 @@ def add_painting(request):
             buffer.seek(0) # rewind pointer back to start
             s3.put_object(
                 Bucket=AWS_STORAGE_BUCKET_NAME,
-                Key='media/Gallery_images/Paintings/{}'.format(content_filename),
+                Key='media/Gallery_images/Paintings/{}'.format(content_filename+"_"+str(file_name_append)),
                 Body=buffer,
                 ContentType='image/jpeg',
             )
@@ -189,8 +204,9 @@ def add_painting(request):
 
 
 
+
             
-            displayurl=MEDIA_URL+'Gallery_images/Paintings/'+request.FILES['upload_pic'].name
+            displayurl=MEDIA_URL+'Gallery_images/Paintings/'+content_filename+"_"+str(file_name_append)
             
             if not add_to_gallery :
                 
