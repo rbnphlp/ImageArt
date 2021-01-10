@@ -317,3 +317,10 @@ a.category-badge > span.badge:hover {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+/***-Gallery painting**/
+
+img.gallerypaintings.card-img-top.img-fluid {
+    height: 512px;
+    
+}

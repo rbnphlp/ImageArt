@@ -30,7 +30,7 @@ import requests
 new_width  = 380
 new_height = 512
 
-hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
+# hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
 
 
 
@@ -175,10 +175,12 @@ def add_painting(request):
                 'content': content_path,
                 'style': style_path,
             },
-            headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
+            headers={'api-key': os.getenv('deepai_apikey')}
 
             )
-            print(r)
+
+            
+            
             displayurl=r.json()['output_url']
             
            
@@ -242,6 +244,8 @@ def add_painting(request):
                 "Combine style and upload image save to media and upload"
                 content_image_pil = PIL.Image.open(request.FILES['upload_pic'])
                 style_image_pil = PIL.Image.open(request.FILES['style_pic'])
+
+                print("l1")
                 "Combine the image and save image url "
                 combined_image=get_concat_v_resize(content_image_pil, style_image_pil, resize_big_image=False)
                 combined_image=combined_image.resize((new_width, new_height), PIL.Image.ANTIALIAS)
@@ -264,6 +268,7 @@ def add_painting(request):
                     Body=buffer,
                     ContentType='image/jpeg',
                 )
+                print("saved joined images")
                 "process the  files  and render "
                 saved_form=form.save()
 
