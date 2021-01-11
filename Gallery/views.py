@@ -188,12 +188,10 @@ def add_painting(request):
             try:
             
                 painting_save_path=MEDIA_ROOT+'/'+'Gallery_images/Paintings/'+str(file_name_append)+content_filename
-                print(painting_save_path)
-                urllib.request.urlretrieve(painting_url, painting_save_path)
-                print("Opeingin paingint")
-                #Save the file in AWS:
-                Painting_api= PIL.Image.open(painting_save_path)
-                Painting_api=Painting_api.resize((new_width, new_height), PIL.Image.ANTIALIAS)
+                #Read directly from url lib
+                
+                Painting_api= Image.open(requests.get(painting_url, stream=True).raw)
+                
 
                  ### Read data to temporary buffer and save to s3
                 print("saving painting")
@@ -283,9 +281,7 @@ def add_painting(request):
                 saved_form.upload_style_combined=display_combinedurl
                 saved_form.save()
 
-                #remove paintings
-                os.remove(painting_save_path)
-
+                #
                 "Take the user to add name description and rating"
                 context={
                    
