@@ -160,6 +160,8 @@ def add_painting(request):
             
 
             ## Get file names  and url paths from s3
+
+            
             content_filename=request.FILES['upload_pic'].name
             style_filename=request.FILES['style_pic'].name
             content_path=MEDIA_URL+'Gallery_images/Upload_pic/'+request.FILES['upload_pic'].name
@@ -179,40 +181,43 @@ def add_painting(request):
             headers={'api-key': os.getenv('deepai_apikey')}
 
             )
+            painting_url=r.json()['output_url']
+            print(painting_url)
 
+            ## Try downloading the file to media folder
+            try:
             
-            
-            displayurl=r.json()['output_url']
-            
-           
-         
-           # Load upload image from s3
-            
+                painting_save_path=MEDIA_ROOT+'/'+'Gallery_images/Paintings/'+str(file_name_append)+content_filename
+                print(painting_save_path)
+                urllib.request.urlretrieve(painting_url, painting_save_path)
+                print("Opeingin paingint")
+                #Save the file in AWS:
+                Painting_api= PIL.Image.open(painting_save_path)
+                Painting_api=Painting_api.resize((new_width, new_height), PIL.Image.ANTIALIAS)
 
-            # upload_image=load_img(content_path)
-            # style_image=load_img(style_path)
-            # stylized_image = hub_model(tf.constant(upload_image), tf.constant(style_image))[0]
-            # l=tensor_to_image(stylized_image)
-
-            # #Save the Painting in the media folder , to upload to s3 and then delet 
-            
-          
-            # "resize Image"
-            # l= l.resize((new_width, new_height), PIL.Image.ANTIALIAS)
-            
-
-            # ### Read data to temporary buffer and save to s3
-            # buffer = io.BytesIO()
-            # l.save(buffer,format="jpeg")
-            # buffer.seek(0) # rewind pointer back to start
-            # s3.put_object(
-            #     Bucket=AWS_STORAGE_BUCKET_NAME,
-            #     Key='media/Gallery_images/Paintings/{}'.format(content_filename+"_"+str(file_name_append)),
-            #     Body=buffer,
-            #     ContentType='image/jpeg',
-            # )
+                 ### Read data to temporary buffer and save to s3
+                print("saving painting")
+                buffer = io.BytesIO()
+                Painting_api.save(buffer,format="jpeg")
+                buffer.seek(0) # rewind pointer back to start
 
 
+                print("put AWS")
+                s3.put_object(
+                Bucket=AWS_STORAGE_BUCKET_NAME,
+                Key='media/Gallery_images/Paintings/{}'.format(str(file_name_append)+content_filename),
+                Body=buffer,
+                ContentType='image/jpeg',
+                  )
+                displayurl=MEDIA_URL+'Gallery_images/Paintings/{}'.format(str(file_name_append)+content_filename)
+            
+
+
+            except:
+                print("No file found")
+
+            
+   
          
             
             
@@ -277,6 +282,9 @@ def add_painting(request):
                 saved_form.image=displayurl
                 saved_form.upload_style_combined=display_combinedurl
                 saved_form.save()
+
+                #remove paintings
+                os.remove(painting_save_path)
 
                 "Take the user to add name description and rating"
                 context={
