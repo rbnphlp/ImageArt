@@ -1,16 +1,72 @@
+
+
+# Web app to  build ,  sell & buy  your paintings
+
 The project as part of Module4:Code Institute  .
 
 
-Frameworks used including Django and PosgresSQL
-
-# Web app to add & share your future holidays
+Frameworks used including Django and PosgresSQL  s3 and heroku.
 
 
-The project as part of Module3:Code Institute  .
+----------------------------------
+         
 
 
-Backend built on MongoDB , with AmazonS3 for Picture Storage and Flask Frame work.
-UI is built on Materialise Framework.
+
+## User Stories for building the app : 
+
+
+### Viewing and Navigation
+
+| UserStoryID      | As a | I want to be able to |So that I can|Implemented|
+| ------------- |:-------------:| ---------:|---------------:| ------------:|
+| 1  |  Shopper| See a list of Paintings| Select some to purchase|  - [x]|
+|  2 | Shopper| View Indivudual Painting details   |  Identify Painting Details , Price and framing options | - [x]|
+|  3 | Shopper| View Shopping Basket   |  Identify Shopping details and price costs at any time during purchase |- [x]|
+| 4 | Shopper| View new paintings  created by user image and style preferences | to create photo art from image|- [x]|
+
+### Registration and User Stories
+
+| UserStoryID      | As a | I want to be able to |So that I can|
+| ------------- |:-------------:| ---------:|---------------:|
+| 5 |  SiteUser|Easily Register for an account| Have a personal account and be able to view my profile|
+|  6 | SiteUser| Easily logon or logout|  Access my Personal account information |
+|  7 | Shopper| Easily recover my password   |  Recover access to my account|
+| 8 | Shopper|Have a personalised user profile| View my Personal order History , order confirmation and save my payment information|
+
+
+
+
+### Searching
+
+| UserStoryID      | As a | I want to be able to |So that I can|
+| ------------- |:-------------:| ---------:|---------------:|
+| 9 |  Shopper|Search for a painting by Name and description| Find a specific Painting I had like to Purchase|
+|  10 |Shopper| Easily see what I have searched for | quickly decide whether the painting was available |
+|  11| Shopper| Easily recover my password   |  Recover access to my account|
+| 12 | Shopper|Sort paintings in each category| Easily identify products|
+
+
+
+
+
+### Purchasing and Checkout
+
+| UserStoryID      | As a | I want to be able to |So that I can|
+| ------------- |:-------------:| ---------:|---------------:|
+| 13 |  Shopper|Easily select the type of frame , size and quantity of a painting when purchasing it | easily get the right painting|
+|  14 |Shopper| view items in my bag to be purchased| Identify quantity and price of items being purchased|
+|  15| Shopper| Easily enter my payment information   |  checkout quicky|
+| 16 |Shopper| View order confirmation after checkout| Verify that havent made any mistakes|
+
+
+###  Admin and Store Management
+
+| UserStoryID      | As a | I want to be able to |So that I can|
+| ------------- |:-------------:| ---------:|---------------:|
+| 17 |  Shopper|Add /Sell a Painting on Site | So I can earn money on site|
+|  18 |Shopper| Edit/update a painting|Change Painting details|
+|  19| Shopper| Remove Paintings  | So i can painting no longer on sale|
 
 
 
@@ -20,7 +76,7 @@ UI is built on Materialise Framework.
 
 
     - A HomePage : Page explaining User needs and Web app Goals  
-    - Holiday Tales Page : Page to display initial cover Images of Holidays along with a Title , likes & No of Images uploaded   
+    - Gallery: Page to display Paintings along with a Title , likes & No of Images uploaded   
     - Add a Holiday : A form page which allows users to add Holidays with a Title and Description (available as FAB at the bottom of page)
     - Add  Memories : A fom page which allows users to add Memories with Title and Description (available as FAB at the bottom of page)
     - Subsuquent Edit and Delete Pages from the above
@@ -48,14 +104,6 @@ Initial wireframe used for developing a prototype :
 > ![](https://github.com/rbnphlp/HolidayStories/blob/master/Screenshot%20from%202020-08-23%2017-40-51.png)	
 
 
-
-## User Stories
-
-> "*I want to see others who visited a destination I am instrested in for a holiday , and things they did* "
-
-> "*I want to share my holiday memories  for others to feedback * "
-
-> "*I  want a collage of memories of my favourite Holidays which tells a story *"
 
 
 ## Design 
@@ -157,57 +205,5 @@ The Web pages was deployed through following :
 ## Image Art User-Stories
 
 
-
-### Viewing and Navigation
-
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 1  |  Shopper| See a list of Paintings| Select some to purchase|
-|  2 | Shopper| View Indivudual Painting details   |  Identify Painting Details , Price and framing options |
-|  3 | Shopper| View Shopping Basket   |  Identify Shopping details and price costs at any time during purchase |
-| 4 | Shopper| View new paintings  created by user image and style preferences | to create photo art from image|
-
-### Registration and User Stories
-
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 5 |  SiteUser|Easily Register for an account| Have a personal account and be able to view my profile|
-|  6 | SiteUser| Easily logon or logout|  Access my Personal account information |
-|  7 | Shopper| Easily recover my password   |  Recover access to my account|
-| 8 | Shopper|Have a personalised user profile| View my Personal order History , order confirmation and save my payment information|
-
-
-
-
-### Searching
-
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 9 |  Shopper|Search for a painting by Name and description| Find a specific Painting I had like to Purchase|
-|  10 |Shopper| Easily see what I have searched for | quickly decide whether the painting was available |
-|  11| Shopper| Easily recover my password   |  Recover access to my account|
-| 12 | Shopper|Sort paintings in each category| Easily identify products|
-
-
-
-
-
-### Purchasing and Checkout
-
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 13 |  Shopper|Easily select the type of frame , size and quantity of a painting when purchasing it | easily get the right painting|
-|  14 |Shopper| view items in my bag to be purchased| Identify quantity and price of items being purchased|
-|  15| Shopper| Easily enter my payment information   |  checkout quicky|
-| 16 |Shopper| View order confirmation after checkout| Verify that havent made any mistakes|
-
-
-###  Admin and Store Management
-
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 17 |  Shopper|Add /Sell a Painting on Site | So I can earn money on site|
-|  18 |Shopper| Edit/update a painting|Change Painting details|
-|  19| Shopper| Remove Paintings  | So i can painting no longer on sale|
 
 
