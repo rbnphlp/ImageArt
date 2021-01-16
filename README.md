@@ -111,7 +111,7 @@ A full schema of the table is as follows :
     
 
 
-> ![](https://github.com/rbnphlp/HolidayStories/blob/master/Screenshot%20from%202020-08-23%2017-40-51.png)	
+> ![](https://github.com/rbnphlp/ImageArt/blob/master/media/home_images/DBDesign.png)	
 
 
 
