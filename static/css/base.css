@@ -130,17 +130,6 @@ footer.myfooter {
 }
 
 
-@media screen and (max-width: 600px) {
-.my-logo {
-    visibility: hidden;
-    clear: both;
-    float: left;
-    margin: 10px auto 5px 20px;
-    width: 28%;
-    display: none;
-  }
-}
-
 
 /* -------------------------------- Media Queries for caption carousel */
 
