@@ -28,8 +28,11 @@ UI is built on Materialise Framework.
 
 Initial wireframe used for developing a prototype :
 
-> ![](https://github.com/rbnphlp/HolidayStories/blob/master/Wire_frame_Holiday_Stories%402x-1.png)	
-
+> ![](https://github.com/rbnphlp/ImageArt/tree/master/media/home_images/wireframe1.png)	
+> ![](https://github.com/rbnphlp/ImageArt/tree/master/media/home_images/wireframe2.png)	
+> ![](https://github.com/rbnphlp/ImageArt/tree/master/media/home_images/wireframe3.png)	
+> ![](https://github.com/rbnphlp/ImageArt/tree/master/media/home_images/wireframe4.png)	
+> ![](https://github.com/rbnphlp/ImageArt/tree/master/media/home_images/wireframe5.png)	
 
 
 ## DB Design 
