@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+
+
+    <div class="container h-100 myheader-container">
+
+                    
+                    <div class="painting-row row justify-content-center h-75">
+
+                            
+                        <div class="my-auto mt-4">
+
+                                <h6 class="text-center">
+                                    We could not generate a Painting for your Image files as they were too big!
+                                    Please choose a file with  smaller dimensions and try again.
+                            </h6>
+
+                            <hr>
+
+                            <img src="https://imageart.s3.eu-west-2.amazonaws.com/media/Gallery_images/Image_not_found.png" alt="">
+
+                            <hr>
+                             <div class="Painting-done text-center mb-4">
+
+                             <a href="{% url 'add_painting'%}" class="btn btn-info btn-lg">Try another One ?</a>
+                         
+                        
+                        </div>
+                         
+                        </div>
+                         
+
+                    </div>
+    </div>
+{% endblock %}
+

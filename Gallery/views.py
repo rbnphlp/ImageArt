@@ -144,6 +144,7 @@ def add_painting(request):
     template = 'Gallery/add_painting.html'
     template2 = 'Gallery/painting_no_gallery.html'
     template3 ='Gallery/painting_price_form.html'
+    template4='Gallery/No_painting_generated.html'
 
     
 
@@ -169,23 +170,24 @@ def add_painting(request):
             print("my content path"+str(content_path))
             print("my style path :",str(style_path))
 
-            ### Save url files for upload and style images , process using tensorflow and delete
-
-
-            r = requests.post(
-            "https://api.deepai.org/api/fast-style-transfer",
-            data={
-                'content': content_path,
-                'style': style_path,
-            },
-            headers={'api-key': os.getenv('deepai_apikey')}
-
-            )
-            painting_url=r.json()['output_url']
-            print(painting_url)
-
+            
             ## Try downloading the file to media folder
             try:
+                ### Save url files for upload and style images , process using tensorflow and delete
+
+
+                r = requests.post(
+                "https://api.deepai.org/api/fast-style-transfer",
+                data={
+                    'content': content_path,
+                    'style': style_path,
+                },
+                headers={'api-key': os.getenv('deepai_apikey')}
+
+                )
+                painting_url=r.json()['output_url']
+                print(painting_url)
+
             
                 painting_save_path=MEDIA_ROOT+'/'+'Gallery_images/Paintings/'+str(file_name_append)+content_filename
                 #Read directly from url lib
@@ -212,7 +214,9 @@ def add_painting(request):
 
 
             except:
-                print("No file found")
+                displayurl="https://imageart.s3.eu-west-2.amazonaws.com/media/Gallery_images/Image_not_found.png"
+
+               
 
             
    
