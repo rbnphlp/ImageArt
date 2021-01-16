@@ -20,31 +20,31 @@ Frameworks used including Django and PosgresSQL  s3 and heroku.
 
 | UserStoryID      | As a | I want to be able to |So that I can|Implemented|
 | ------------- |:-------------:| ---------:|---------------:| ------------:|
-| 1  |  Shopper| See a list of Paintings| Select some to purchase|  - [x]|
-|  2 | Shopper| View Indivudual Painting details   |  Identify Painting Details , Price and framing options | - [x]|
-|  3 | Shopper| View Shopping Basket   |  Identify Shopping details and price costs at any time during purchase |- [x]|
-| 4 | Shopper| View new paintings  created by user image and style preferences | to create photo art from image|- [x]|
+| 1  |  Shopper| See a list of Paintings| Select some to purchase|  Yes|
+|  2 | Shopper| View Indivudual Painting details   |  Identify Painting Details , Price and framing options | Yes|
+|  3 | Shopper| View Shopping Basket   |  Identify Shopping details and price costs at any time during purchase |Yes|
+| 4 | Shopper| View new paintings  created by user image and style preferences | to create photo art from image|Yes|
 
 ### Registration and User Stories
 
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 5 |  SiteUser|Easily Register for an account| Have a personal account and be able to view my profile|
-|  6 | SiteUser| Easily logon or logout|  Access my Personal account information |
-|  7 | Shopper| Easily recover my password   |  Recover access to my account|
-| 8 | Shopper|Have a personalised user profile| View my Personal order History , order confirmation and save my payment information|
+| UserStoryID      | As a | I want to be able to |So that I can|Implemented|
+| ------------- |:-------------:| ---------:|---------------:| ------------:|
+| 5 |  SiteUser|Easily Register for an account| Have a personal account and be able to view my profile|Yes|
+|  6 | SiteUser| Easily logon or logout|  Access my Personal account information |Yes|
+|  7 | Shopper| Easily recover my password   |  Recover access to my account|Yes|
+| 8 | Shopper|Have a personalised user profile| View my Personal order History , order confirmation and save my payment information|Yes|
 
 
 
 
 ### Searching
 
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 9 |  Shopper|Search for a painting by Name and description| Find a specific Painting I had like to Purchase|
-|  10 |Shopper| Easily see what I have searched for | quickly decide whether the painting was available |
-|  11| Shopper| Easily recover my password   |  Recover access to my account|
-| 12 | Shopper|Sort paintings in each category| Easily identify products|
+| UserStoryID      | As a | I want to be able to |So that I can|Implemented|
+| ------------- |:-------------:| ---------:|---------------:|------------:|
+| 9 |  Shopper|Search for a painting by Name and description| Find a specific Painting I had like to Purchase|Yes|
+|  10 |Shopper| Easily see what I have searched for | quickly decide whether the painting was available |Yes|
+|  11| Shopper| Easily recover my password   |  Recover access to my account|Yes|
+| 12 | Shopper|Sort paintings in each category| Easily identify products|Yes|
 
 
 
@@ -52,21 +52,23 @@ Frameworks used including Django and PosgresSQL  s3 and heroku.
 
 ### Purchasing and Checkout
 
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 13 |  Shopper|Easily select the type of frame , size and quantity of a painting when purchasing it | easily get the right painting|
-|  14 |Shopper| view items in my bag to be purchased| Identify quantity and price of items being purchased|
-|  15| Shopper| Easily enter my payment information   |  checkout quicky|
-| 16 |Shopper| View order confirmation after checkout| Verify that havent made any mistakes|
+| UserStoryID      | As a | I want to be able to |So that I can|Implemented|
+| ------------- |:-------------:| ---------:|---------------:|------------:|
+| 13 |  Shopper|Easily select the type of frame , size and quantity of a painting when purchasing it | easily get the right painting|Yes|
+|  14 |Shopper| view items in my bag to be purchased| Identify quantity and price of items being purchased|Yes|
+|  15| Shopper| Easily enter my payment information   |  checkout quicky|Yes|
+| 16 |Shopper| View order confirmation after checkout| Verify that havent made any mistakes|Yes|
 
 
 ###  Admin and Store Management
 
-| UserStoryID      | As a | I want to be able to |So that I can|
-| ------------- |:-------------:| ---------:|---------------:|
-| 17 |  Shopper|Add /Sell a Painting on Site | So I can earn money on site|
-|  18 |Shopper| Edit/update a painting|Change Painting details|
-|  19| Shopper| Remove Paintings  | So i can painting no longer on sale|
+| UserStoryID      | As a | I want to be able to |So that I can|Implemented|
+| ------------- |:-------------:| ---------:|---------------:|------------:|
+| 17 |  Shopper|Add /Sell a Painting on Site | So I can earn money on site|Yes|
+|  18 |Shopper| Edit/update a painting|Change Painting details|Yes|
+|  19| Shopper| Remove Paintings  | So i can painting no longer on sale|Yes|
+|  20| Shopper|Sell a Painting on Site    |earn money |No|
+
 
 
 
@@ -76,12 +78,15 @@ Frameworks used including Django and PosgresSQL  s3 and heroku.
 
 
     - A HomePage : Page explaining User needs and Web app Goals  
-    - Gallery: Page to display Paintings along with a Title , likes & No of Images uploaded   
-    - Add a Holiday : A form page which allows users to add Holidays with a Title and Description (available as FAB at the bottom of page)
-    - Add  Memories : A fom page which allows users to add Memories with Title and Description (available as FAB at the bottom of page)
+    - Gallery: Page to display Paintings along with a Title , likes & No of Images uploaded  with search and sorting options
+    - View Painting: Page to display a single Paintings in a User chosen Frame  and option to save the shopping bag 
+    - Create  : A form page which allows users to create new paintings and allow users to either save it to the Gallery or simply view the painting
+    - Shopping bag : A page which allows users to view theur shopping products
     - Subsuquent Edit and Delete Pages from the above
-    - Memories : Page displaying a carousel of Memories in a card image
-
+    - Sign In / Create Account : Allow users to sign-up or login in to the website information
+    - Order History: Allow users to view their previous Order History
+    - Payment Form : Which Allows users to pay for their items in the shopping bag
+    
 Initial wireframe used for developing a prototype :
 
 > ![](https://github.com/rbnphlp/ImageArt/blob/master/media/home_images/wireframe1.png)	
@@ -93,11 +98,16 @@ Initial wireframe used for developing a prototype :
 
 ## DB Design 
 
-+ The MongoDb had two collections , Holidays and Memories :
-    - Holidays Collection simply containg the title and Destination along with upvotes info
-    - Memories Collection had the corresponding memory title , description , image url link along with each memory referencing the Holidays Collection by the unique        id.This allowed , to keep the Memories collection relatively small  and well within limit of 16MB for future uploads
-    - Images are uploaded initially captured from form uploads , processed and uploaded to s3 using boto3.The corresponding link is then inserted along with form aguments to MongoDB for future retrieval. Any additional image uploaded for a same memory  will simply be replaced with the most recent image. And hence , Each Memory has one image with each holiday having multiple Memories.
++  Postgres SQL were designed as Follows :
+    - Category Table which contains various categories for the paintings:
+   
+     
+    - Painting Table which contains uploaded images ,created paintings , user choices etc regarding painitings:
+        
+    -  Order Table which contains Info regarding order , delivery info etc .
+    - User Profile table  which contants info about user 
 
+A full schema of the table is as follows :
     
 
 
