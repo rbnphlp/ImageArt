@@ -125,7 +125,7 @@ The Web-Pages are designed  to make it users to shop and create new paintings ve
 + Features Added: 
     - Allow Users to purchase  paintings with specific frames and sizes
     - Allow Users to  create their own painting
-    - Allow users how each painting is created by tiling uploaded style and content images , offering inspiration to create new paintings
+    - Allow users to see how each painting is created by tiling uploaded style and content images , offering inspiration to create new paintings
     - Allow Users to  create and then view the corresponding painting
     - Allows users to create and then sell it on the website
     - Allow users to sort and select categories of various paintings
@@ -161,6 +161,15 @@ The Web-Pages are designed  to make it users to shop and create new paintings ve
 ### External API's
 + deepai.org
 
+## Code (Attribution) :
+
++ Most of UI & BAck-end adapted from Code instute tutorials
+
++ Code for moving carousel with buttons adapted from  https://stackoverflow.com/questions/46249541/change-arrow-colors-in-bootstraps-carousel to customise carousel icons 
+
++  Frames created using code adapted from https://medium.com/@saishaddai/til-css-to-draw-a-frame-from-a-picture-2b0cfcf67c9a  
+
+
 
   
 ## Testing :
@@ -192,8 +201,7 @@ The Web-Pages are designed  to make it users to shop and create new paintings ve
 ### Bug Fixes (Open & Closed) :
 
 
-* Cannot add paitings with different frames 
-* Check out painitings from home page not returning tags  when  and search bar
+
 
 | Bug-Location      | Bug-Type  | Solution| Bug-Status|
 | ------------- |:-------------:| ---------:| ---------:|
