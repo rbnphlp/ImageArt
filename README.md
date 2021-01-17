@@ -1,6 +1,6 @@
 
 
-# Web app to  build ,  sell & buy  your paintings
+# Web app to  build,sell & buy  paintings using Style transfer
 
 The project as part of Module4:Code Institute  .
 
@@ -119,24 +119,25 @@ A full schema of the table is as follows :
 ## Design 
 
 
-The Web-Pages are designed to make easy  add and share holiday memories and Images with little effort.
+The Web-Pages are designed  to make it users to shop and create new paintings very accessible ( albeit for limited images sizes)
 
 
 + Features Added: 
-    - Allow Users Add Holidays with a Title & Destination 
-    - Allow Users to Add Memories for Each holidays
-    - Allow Users to Add Images for each Memory along with short , titles and descriptions
-    - Allows users to edit and Delete Memories 
-    - Allow users to delete Holidays from Mongo-db
-    - Allow users to up-vote Holidays they are intrested in
+    - Allow Users to purchase  paintings with specific frames and sizes
+    - Allow Users to  create their own painting
+    - Allow users how each painting is created by tiling uploaded style and content images , offering inspiration to create new paintings
+    - Allow Users to  create and then view the corresponding painting
+    - Allows users to create and then sell it on the website
+    - Allow users to sort and select categories of various paintings
+    - Allow users to search for paintings they are intrested in 
+    - Allow users to have their own USer profiles with their Order History
+    
     
 
 + Features Not Implemented or nice to Haves :
     - Pagination 
-    - Search bar based on Country,Date etc
-    - USer profiles
     - A comment section
-    - Long titles and description can break up the container grid and hence need to povide a maximum in the form fields
+    - A Rating section
 
 
 
@@ -149,13 +150,17 @@ The Web-Pages are designed to make easy  add and share holiday memories and Imag
 + HTML
 + CSS
 + Javascript
-+ Python (Flask , boto3, jinja, json)
-+ Mongo-db
++ Python (Django)
++ PosgresSQL
+
     
 ### Libraries /Frameworks:
-+ Materialise
 + Jquery
-+ MaterialIcons
+
+
+### External API's
++ deepai.org
+
 
   
 ## Testing :
@@ -170,28 +175,33 @@ The Web-Pages are designed to make easy  add and share holiday memories and Imag
 
 
 + Body  :
-     - Loaded Holidays Page in  (Safari,Firefox and Chrome)
-     - Works well in Desktop versions , Allignment issues when Title is long in Holidays Page for Laptop + Mobile views
-     - Memories Page compatible in all views , however carousel is sometime non-responsive  on mobile versions
-     - Forms render well in all views , buttons however too big fo mobile view.
+     - Loaded Pages in  (Safari,Firefox and Chrome)
+     - Works well in Desktop versions + Mobile views
+     - Forms render well in all views 
      
-+
-            
+     
+           
      
 + Full web page checks : 
-     - Tested all of the above on desktop (firefox and chrome) - *Other Screen sizes not implemented*
-     - Ran the web page for any html/css errors on https://validator.w3.org/ - issues with closing a tags
+     - Tested all of the above on desktop (firefox and chrome) and mobile (iphone 6+)
 
++ API requests :
+    - Tested API calls on large and small Image sizes 
+    - Limited to 5000 calls in total
      
 ### Bug Fixes (Open & Closed) :
 
 
-| Bug-Location      | Bug-Type  | Bug-Status|
-| ------------- |:-------------:| ---------:|
-|  view_jolidays.html   |  html-validation error | Fixed |
-|  view_memories.html   |  html-validation error   |  Fixed |
-|  Various routes in Flask (Add_memories )|   logic |  Fixed |
-|   css &html |   Resposniveness - Carousel sometimes not responsive on mobile  |  Open |
+* Cannot add paitings with different frames 
+* Check out painitings from home page not returning tags  when  and search bar
+
+| Bug-Location      | Bug-Type  | Solution| Bug-Status|
+| ------------- |:-------------:| ---------:| ---------:|
+|  Stripe Payments   | Prices with smaller than $.50 returns error from stripe | Add $1 to prices smaller than $1 and fix the corresponding bag to show $0.00 in jinja | Fixed |
+|  Index.html  |  search query   |Change url link with corresponding search terms to return entire categories| Fixed |
+|  Index html |   Html-validation errors|  NA| Open|
+|  R14 error Heroku | App would  close after  afew seconds due to Image processing script taking up too much memory  |  Had to exclude all the image processing scripts and Used an external API| Fixed|
+
 
 ## Deployment
 
@@ -199,6 +209,8 @@ The Web pages was deployed through following :
 +  Setting up a heroku app with login.
 + adding files through git remote 
 + made sure all keys + access keys were deleted and any accidentally uplodaded keys were rotated to new ones .All config variables were set to enviornment variables using Heroku set CLI and using a pylib dot env to read the env variables.
++ Set up Postgres Database 
++ Install requirements .txt  
 + Build process through git remote heroku and push
 
 
@@ -206,14 +218,8 @@ The Web pages was deployed through following :
 
 
 ## Acknowledgements
- Thanks for Code institute and their awesome tutor support team along with my mentor :)
+ Thanks for Code institute and their awesome tutor support team :)
  
-
-
-
-
-## Image Art User-Stories
-
 
 
 
